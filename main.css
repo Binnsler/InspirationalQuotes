@@ -61,7 +61,7 @@
 
 }
 
-/*Input Placeholder Styling*/
+/****** Input Placeholder Styling ******/
 
 ::-webkit-input-placeholder{
 	font-size: 1em;
@@ -69,8 +69,19 @@
 }
 
 
+/****** jQuery CSS ******/
 
+.quote-author{
+	color: #1ab193;
+	font-size: 1.2em;
+	margin: none;
+}
 
+.delete-tag{
+	float: right;
+	color: #999999;
+	margin: 1vh 0;
+}
 
 
 
