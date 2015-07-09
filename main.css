@@ -26,6 +26,12 @@
 	margin: 3vh 0;
 }
 
+.break-div-hidden{
+	height: .15vh;
+	clear: both;
+	margin: 3vh 0;
+}
+
 .quote-input{
 	width: 96%;
 	height: 10vh;
@@ -65,7 +71,8 @@
 
 ::-webkit-input-placeholder{
 	font-size: 1em;
-	padding-left: 8px;
+	padding-left: 1%;
+	padding-top: 1%;
 }
 
 
@@ -77,12 +84,25 @@
 	margin: none;
 }
 
+.star-container{
+	text-align: right;
+	margin: 1vh 0;
+	display: block;
+	
+}
+
 .delete-tag{
-	float: right;
+	text-align: right;
 	color: #999999;
 	margin: 1vh 0;
 }
 
+.off-star{
+	color: #999999;
+}
+.on-star{
+	color: #1ab193;
+}
 
 
 

@@ -4,25 +4,26 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<link rel="stylesheet" href="main.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 <body>
 	<div class="main-container">
 		<div class="break-div"></div>
 		<div class="input-container">
-			<textarea class="quote-input center-horiz simplespacing" placeholder="Something"></textarea>
-			<input placeholder="Write your quote here" type="text" class="quote-input center-horiz simplespacing">
-			<input placeholder="Author name" type="text" class="author-input">
+			<textarea class="quote-input center-horiz simplespacing" placeholder="Write your quote here"></textarea>
+			<textarea placeholder="Author name" type="text" class="author-input"></textarea>
 			<button class="submit-button">Submit</button>
 		</div>
-		<div class="break-div"></div>
+		<div class="break-div-hidden"></div>
 		<div class="button-container">
-			<button class="action-button">Undo Delete</button>
+			<button class="action-button undo-button">Undo Delete</button>
 			<button class="action-button"> Random Quote </button>
 		</div>
 		<div class="break-div"></div>
 		<div class="quote-list-container"></div>
 	</div>
-
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
 	<script src="main.js"></script>
 </body>
