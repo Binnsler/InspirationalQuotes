@@ -7,7 +7,9 @@ $(document).on('ready', function(){
 
 	// Ranking method for $quoteList
 	$quoteList.sortByRating = function(){
+
 		return _.sortBy(this, 'rating').reverse();
+
 	}
 
 	var Quote = function(author, quote, quoteId, rating){
@@ -35,7 +37,7 @@ $(document).on('ready', function(){
 		$quoteList.push(quoteObject);
 
 		// Sort the list descending by rating
-		$quoteList.sortByRating();
+		// $quoteList.sortByRating();
 
 		// Delete current quote list and refill it with the newly ordered list
 		$('.quote-list-container').empty();
@@ -70,6 +72,7 @@ $(document).on('ready', function(){
 	// Starring elements
 	$('body').on('click', '.off-star', function(){
 
+
 		$(this).siblings().andSelf().removeClass('on-star');
 
 		var thisQuoteId = $(this).closest('.quote-item').data('quote-id');
@@ -78,7 +81,8 @@ $(document).on('ready', function(){
 
 		$quoteList[thisQuoteId-1].rating = starLevel;
 
-		$(this).prevAll().andSelf().addClass('on-star');
+		$(this).prevAll().andSelf().addClass('on-star animated bounce');
+
 
 		$('.quote-list-container').empty();
 		
