@@ -1,7 +1,7 @@
 $(document).on('ready', function(){
 
 	// Global variables
-	var $undoDelete; // Temporarily store the most recently deleted quote
+	var $undoDelete; // Temporarily stores the most recently deleted quote
 	var $quoteList = [];
 	var quoteCount = 0;
 
@@ -11,8 +11,8 @@ $(document).on('ready', function(){
 	}
 
 	var Quote = function(author, quote, quoteId, rating){
-		this.author = author;
-		this.quote = quote;
+		this.authorText = author;
+		this.quoteText = quote;
 		this.quoteId = quoteId;
 		this.rating = rating;
 	}
@@ -20,17 +20,19 @@ $(document).on('ready', function(){
 	// Create a quote and store it as an object in the global $quoteList array
 	$('.submit-button').on('click', function(){
 
-		var itemObject = {};
+		// Count++ so that every quote gets a unique dataId
 		quoteCount ++;
 
-		quoteId = quoteCount;
-		quoteText = $('.quote-input').val();
-		authorText = $('.author-input').val();
+		var tempAuthorText = $('.author-input').val();
+		var tempQuoteText = $('.quote-input').val();
+		var tempQuoteId = quoteCount;
 
-		var itemObject = new Quote(authorText, quoteText, quoteId, 0)
 
-		itemObject.html = '<div class="quote-item" data-quote-id="' + quoteCount + '"</data->><p class="quote-text">' + itemObject.quoteText + '</p><p class="quote-author">' + itemObject.authorText + '</p><div class="star-container"><i class="fa fa-star-o fa-lg off-star" data-id="1"></i><i class="fa fa-star-o fa-lg off-star" data-id="2"></i><i class="fa fa-star-o fa-lg off-star" data-id="3"></i><i class="fa fa-star-o fa-lg off-star" data-id="4"></i><i class="fa fa-star-o fa-lg off-star" data-id="5"></i></div><p class="delete-tag">delete</p><div class="break-div"></div></div>';
-		$quoteList.push(itemObject);
+		var quoteObject = new Quote(tempAuthorText, tempQuoteText, tempQuoteId, 0)
+
+		quoteObject.html = $('<div class="quote-item" data-quote-id="' + quoteObject.quoteId + '"><p class="quote-text">' + quoteObject.quoteText + '</p><p class="quote-author">' + quoteObject.authorText + '</p><div class="star-container"><i class="fa fa-star-o fa-lg off-star" data-id="1"></i><i class="fa fa-star-o fa-lg off-star" data-id="2"></i><i class="fa fa-star-o fa-lg off-star" data-id="3"></i><i class="fa fa-star-o fa-lg off-star" data-id="4"></i><i class="fa fa-star-o fa-lg off-star" data-id="5"></i></div><p class="delete-tag">delete</p><div class="break-div"></div></div>');
+
+		$quoteList.push(quoteObject);
 
 		// Sort the list descending by rating
 		$quoteList.sortByRating();
@@ -38,8 +40,9 @@ $(document).on('ready', function(){
 		// Delete current quote list and refill it with the newly ordered list
 		$('.quote-list-container').empty();
 
-		$quoteList.forEach(function(element){
+		$quoteList.sortByRating().forEach(function(element){
 			$('.quote-list-container').append(element.html);
+			// $(element.html).hide().slideDown(500);
 		})
 
 	})
@@ -49,21 +52,41 @@ $(document).on('ready', function(){
 		$undoDelete = $(this).closest('.quote-item')
 		$undoDelete.remove();
 
+
 	})
 
 	// Undo a deletion
 	$('body').on('click', '.undo-button', function(){
 		$('.quote-list-container').append($undoDelete);
 		$undoDelete = null;
+
+		$('.quote-list-container').empty();
+		
+		$quoteList.sortByRating().forEach(function(element){
+			$('.quote-list-container').append(element.html);
+		})
 	})
 
 	// Starring elements
 	$('body').on('click', '.off-star', function(){
+
+		$(this).siblings().andSelf().removeClass('on-star');
+
+		var thisQuoteId = $(this).closest('.quote-item').data('quote-id');
+
+		var starLevel = $(this).data('id');
+
+		$quoteList[thisQuoteId-1].rating = starLevel;
+
 		$(this).prevAll().andSelf().addClass('on-star');
-		$(this).
+
+		$('.quote-list-container').empty();
+		
+		$quoteList.sortByRating().forEach(function(element){
+			$('.quote-list-container').append(element.html);
+		})
 	})
 
-	console.log($quoteList);
 })
 
 
